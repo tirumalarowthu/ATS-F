@@ -31,6 +31,8 @@ const Forgot = () => {
             case(formData.email.includes("@gmail.com")===false):setMsg({email:"Email should includes @gmail.com"})
             break;
             case(!formData.password):setMsg({password:"Password is required"})
+            break;
+            default:return true
         }
     }
     const handleFocus=(e)=>{

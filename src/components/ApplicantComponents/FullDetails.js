@@ -1,7 +1,7 @@
 import React from 'react'
 import FullDetailsForm from './FullDetailsForm'
 import { useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate} from 'react-router-dom'
 
 const FullDetails = () => {
     const applicantdetails = useSelector(state => state.singleApplicant.ApplicantDetails)

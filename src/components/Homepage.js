@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import Header from './Header'
 import { fetchApplicants } from '../Redux/applicantSlice'
 import ApplicantsTable from './ApplicantComponents/ApplicantsTable'
-
 const Homepage = () => {
   const dispatch=useDispatch()
   const status = useSelector(state => state.applicantList.status)
@@ -25,5 +23,4 @@ const Homepage = () => {
     </div>
   )
 }
-
 export default Homepage

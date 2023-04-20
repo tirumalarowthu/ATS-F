@@ -7,14 +7,13 @@ import UpdateApplicant from './components/Updates/UpdateApplicant';
 import AddApplicant from './components/ApplicantComponents/AddApplicant';
 import FullDetails from './components/ApplicantComponents/FullDetails';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import UpdateOneApp from './components/Updates/UpdateOneApp';
 import Forgot from './components/Forgot';
 
 function App() {
   const [isLogin,setIsLogin]=useState(localStorage.getItem("AdminInfo"))
   return (
-    <div >
+    <div > 
      {isLogin?<BrowserRouter>
          <Header/>
         <Routes>

@@ -1,7 +1,5 @@
 import React from 'react'
-import Header from '../Header'
 import UpdateApplicantForm from './UpdateApplicantForm'
-
 const UpdateApplicant = () => {
     return (
         <>
@@ -11,5 +9,4 @@ const UpdateApplicant = () => {
         </> 
     )
 }
-
 export default UpdateApplicant
