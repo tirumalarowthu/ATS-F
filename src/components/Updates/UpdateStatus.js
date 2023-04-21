@@ -47,11 +47,11 @@ const UpdateStatus = ({ details }) => {
                 Object.keys(details).length > 0 ? <form onSubmit={handleUpdateApplicantStatus} className='my-4'>
                     <div className="">
                         <label>Name of the Applicant :</label>
-                        <input value={details.name.toUpperCase()} readOnly className='form-control ' type="text" />
+                        <input value={details.name} readOnly className='form-control ' type="text" />
                     </div><br />
                     <div className="">
                         <label>Role of the Applicant :</label>
-                        <input value={details.role.toUpperCase()} readOnly className='form-control ' type="text" />
+                        <input value={details.role} readOnly className='form-control ' type="text" />
                     </div><br />
                     <div className="">
                         <label>Status of the Applicant :</label>
