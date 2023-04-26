@@ -23,7 +23,7 @@ const AddApplicant = () => {
         if (res.status === 200) {
           toast.success(`Applicant created & Id is ${res.data._id}`)
           event.target.reset()
-          // window.location.reload(false)
+          window.location.reload(false)
           setValidated(false)
         }
       }
