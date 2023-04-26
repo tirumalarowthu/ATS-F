@@ -1,0 +1,13 @@
+.pagination {
+    padding: 10px;
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+}
+.pagination__disable {
+    opacity: 0;
+}
+.pagination__selected {
+    background-color: rgb(220, 220, 220);
+}

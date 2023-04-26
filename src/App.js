@@ -1,4 +1,4 @@
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Homepage from './components/Homepage';
@@ -9,27 +9,31 @@ import FullDetails from './components/ApplicantComponents/FullDetails';
 import Header from './components/Header';
 import UpdateOneApp from './components/Updates/UpdateOneApp';
 import Forgot from './components/Forgot';
+import RegistrationForm from './FormValidations';
 
 function App() {
-  const [isLogin,setIsLogin]=useState(localStorage.getItem("AdminInfo"))
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("AdminInfo"))
   return (
-    <div > 
-     {isLogin?<BrowserRouter>
-         <Header/>
+    <div >
+      {isLogin ? <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<Homepage />} ></Route>
-          <Route path="/addApplicant" element={<AddApplicant/>}></Route>
-          <Route path="/updateApplicant" element={<UpdateApplicant/>}></Route>
-          <Route path="/update/one"element={<UpdateOneApp/>} ></Route>
-          <Route path="/fullview" element={<FullDetails/>}></Route>
+          <Route path="/addApplicant" element={<AddApplicant />}></Route>
+          <Route path="/updateApplicant" element={<UpdateApplicant />}></Route>
+          <Route path="/update/one" element={<UpdateOneApp />} ></Route>
+          <Route path="/fullview" element={<FullDetails />}></Route>
+          <Route path='/valid' element={<RegistrationForm />}></Route>
+
         </Routes>
       </BrowserRouter> : <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login setIsLogin={setIsLogin} />}></Route>
-            <Route path='/forgot' element={<Forgot />}></Route>
+          <Route path='/forgot' element={<Forgot />}></Route>
+
         </Routes>
       </BrowserRouter>}
-      
+
     </div>
   );
 }

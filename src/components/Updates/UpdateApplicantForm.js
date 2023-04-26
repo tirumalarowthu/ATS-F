@@ -7,28 +7,22 @@ import { CCardHeader } from '@coreui/react'
 
 const UpdateApplicantForm = () => {
     const appDetails = useSelector(state => state.singleApplicant.ApplicantDetails)
-    const dispatch = useDispatch() 
+    const dispatch = useDispatch()
     const handleSubmit = async (e) => {
         e.preventDefault()
         const email = document.getElementById("email").value
         if (email !== "") {
-            try {
-                await axios.get(`http://localhost:9001/singleApplicant/${email}`).then(res => {
-                    dispatch(GetApplicant(res.data))
-                })
-            } catch (err) {
-                if (err.message) {
-                    alert("Enter valid email")
-                }
-            }
-
+            await axios.get(`http://localhost:9001/singleApplicant/${email}`).then(res => {
+                dispatch(GetApplicant(res.data))
+            }).then(res=>console.log(res))
+            .catch(err=>console.log(err.message))
         }
     }
     return (
         <div className='container p-4'>
             <CCardHeader className='text-center'>
                 Update Applicant Status
-            </CCardHeader><br/>
+            </CCardHeader><br />
             {
                 Object.keys(appDetails).length > 0 ? <UpdateStatus details={appDetails} /> :
                     <div>

@@ -5,20 +5,19 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 import { GetApplicant } from '../../Redux/updateApplicantSlice'
-
 const FullDetailsForm = ({ applicantdetails }) => {
-    const [update,setUpdate]=useState(false)
-    const dispatch=useDispatch()
+    const [update, setUpdate] = useState(false)
+    const dispatch = useDispatch()
     const [postData, setPostData] = useState({
         email: applicantdetails.email,
         commentBy: "",
         comment: "",
         status: "",
-        cRound:applicantdetails.status,
+        cRound: applicantdetails.status,
         nextRound: ""
     })
     const handleUpdateApplicantStatus = async (e) => {
-        e.preventDefault() 
+        e.preventDefault()
         if (postData.email !== "" && postData.commentBy !== "" && postData.comment !== "" && postData.status !== "" && postData.nextRound !== "") {
             const config = { headers: { "Content-Type": "Application/json" } }
             await axios.put("http://localhost:9001/appicant/update/comments", postData, config)
@@ -29,7 +28,7 @@ const FullDetailsForm = ({ applicantdetails }) => {
                 }).catch((err) => {
                     toast.info("Unable to update now ! try after some time")
                 })
-        }else{
+        } else {
             alert("All feilds are required")
         }
     }
@@ -158,25 +157,25 @@ const FullDetailsForm = ({ applicantdetails }) => {
                                     </CCol>
                                     <CCol md={6}>
                                         <CFormInput
-                                         type="text"
-                                         value={applicantdetails.createdAt.substring(0,10)}
-                                         
-                                         readOnly
-                                         label="Applied Date"
-                                         />
+                                            type="text"
+                                            value={applicantdetails.createdAt.substring(0, 10)}
+
+                                            readOnly
+                                            label="Applied Date"
+                                        />
                                     </CCol>
                                     <CCol md={6}>
                                         <CFormInput
                                             type="text"
-                                            onClick={()=>window.open(`${applicantdetails.resumeLink}`)}
+                                            onClick={() => window.open(`${applicantdetails.resumeLink}`)}
                                             value={applicantdetails.resumeLink}
-                                            style={{color:"green",cursor:"pointer"}}
+                                            style={{ color: "green", cursor: "pointer" }}
                                             readOnly
                                             label="Resume Link"
                                         />
-                                    </CCol> 
+                                    </CCol>
                                 </CForm>
-                               
+
                                 {
                                     applicantdetails.comments.length > 0 ? <>
                                         <React.Fragment>
@@ -200,12 +199,12 @@ const FullDetailsForm = ({ applicantdetails }) => {
                             </CRow>
                         </CCardBody>
                         <div className="container">
-                            <button style={{margin:" 0px 20px 10px 0px"}} onClick={() => setUpdate(!update)} className='btn btn-primary float-right'>Add Comments</button>
+                            <button style={{ margin: " 0px 20px 10px 0px" }} onClick={() => setUpdate(!update)} className='btn btn-primary float-right'>Add Comments</button>
                         </div>
 
-                       {update && <CCardBody>
+                        {update && <CCardBody>
                             <CCardHeader className='text-center '>
-                                Update Applicant Status 
+                                Update Applicant Status
                             </CCardHeader><br />
                             <form onSubmit={handleUpdateApplicantStatus}>
                                 <div className="">
@@ -248,7 +247,7 @@ const FullDetailsForm = ({ applicantdetails }) => {
                         </CCardBody>}
 
                     </CCard>
-                    
+
                 </> : null
             }
         </>
@@ -256,3 +255,10 @@ const FullDetailsForm = ({ applicantdetails }) => {
 }
 
 export default FullDetailsForm
+
+
+
+
+
+
+    // < td > <ConfirmModel _id={applicantdetails._id} commentOne={item.comment} commentId={item._id} /></ >

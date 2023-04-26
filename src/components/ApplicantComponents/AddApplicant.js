@@ -3,11 +3,10 @@ import { CRow, CCol, CCard, CCardHeader, CCardBody, CButton, CForm, CFormInput, 
 import axios from 'axios'
 import { toast } from 'react-toastify'
 const AddApplicant = () => {  
-
   const [validated, setValidated] = useState(false)
   const [experience, setExperience] = useState(false)
-  const [formData, setFormData] = useState({})
-  const handleSubmit = async (event) => {
+  const [formData, setFormData] = useState({role:"Full Stack developer"})
+  const handleSubmit = async (event) => { 
     const form = event.currentTarget
     event.preventDefault()
     setValidated(true)
@@ -41,7 +40,6 @@ const AddApplicant = () => {
     setFormData({ ...formData, [name]: value })
   }
   return (
-
     <>
       <CCard className="mb-4 container">
         <CCardHeader className='text-center'>
@@ -242,6 +240,4 @@ const AddApplicant = () => {
 }
 
 export default AddApplicant
-
-
 

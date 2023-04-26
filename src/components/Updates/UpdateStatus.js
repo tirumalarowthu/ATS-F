@@ -93,7 +93,7 @@ const UpdateStatus = ({ details }) => {
                         <input className='form-control' name="comment" value={postData.comment} onChange={handleInputChange} type="text" />
                     </div>
                     <br />
-                    <div>
+                    <div >
                         <button className='btn btn-primary'>Update</button>
                     </div>
                 </form> : <p></p>

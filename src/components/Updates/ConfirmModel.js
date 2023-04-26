@@ -1,35 +1,45 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function ConfirmModel({ handleUpdateApplicantStatus }) {
+function ConfirmModel({ _id, commentId, commentOne }) {
     const [show, setShow] = useState(false);
-
+    const [commentP, setComment] = useState(commentOne)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const handleEdit = async () => {
+        await axios.patch("http://localhost:9001/comment", {
+            id: _id,
+            commentId: commentId,
+            comment: commentP
+        })
+            .then(res => window.location.reload(false))
+            .catch(err => console.log(err.message))
+    }
+    console.log(_id, commentId, commentOne)
+    console.log(commentP)
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Update
-            </Button>
+            <button className='btn btn-primary' onClick={handleShow}>Edit</button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Do you want to update status</Modal.Title>
+                    <Modal.Title>Edit the comments on the applicant</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Please confirm that you want to update applicant status</Modal.Body>
+                <Modal.Body>
+                    <input value={commentP} onChange={(e) => setComment(e.target.value)} className='form-control' type="text" />
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
                     <Button variant="primary" onClick={() => {
                         handleClose()
-                       handleUpdateApplicantStatus()
-
+                        handleEdit()
                     }
                     }>
-                        Update Applicant
+                        Save Changes
                     </Button>
                 </Modal.Footer>
             </Modal>
