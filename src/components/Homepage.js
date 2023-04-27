@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { fetchApplicants } from '../Redux/applicantSlice'
-import ApplicantsTable from './ApplicantComponents/ApplicantsTable'
+import ApplicantTablePage from './ApplicantComponents/ApplicantTablePage'
+// import ApplicantsTable from './ApplicantComponents/ApplicantsTable'
 const Homepage = () => {
   const dispatch=useDispatch()
   const status = useSelector(state => state.applicantList.status)
@@ -16,9 +17,9 @@ const Homepage = () => {
         <div>
           <h4 className='text-center p-4'>Welcome to Applicant Tracking System</h4>
         </div>
-        <div className='container'>
-        <ApplicantsTable ApplicantData={ApplicantData} />
-        </div>
+      {ApplicantData.length > 0 ? <div className='container'>
+        <ApplicantTablePage ApplicantData={ApplicantData} />
+      </div> : null}
        
     </div>
   )
