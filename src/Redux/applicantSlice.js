@@ -11,7 +11,7 @@ export const fetchApplicants = createAsyncThunk("applicant slice", async () => {
 
         const data = await axios.get("http://localhost:9001/allApplicants").then(res => res.data)
         // console.log(data)
-        return data.reverse()
+        return data
 
     }
     catch (err) {
@@ -34,8 +34,14 @@ const applicantSlice = createSlice({
                     state.ApplicantsList = newData
                     break;
                 }
-                default:{
-                    return state                    
+                case "appliedDate": {
+                    console.log("first")
+                    const newData = state.ApplicantsList.sort((a, b) =>(new Date(b.createdAt) - new Date(a.createdAt)))
+                    state.ApplicantsList = newData
+                    break;
+                }
+                default: {
+                    return state
                 }
             }
         }

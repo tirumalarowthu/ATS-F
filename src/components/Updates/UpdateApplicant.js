@@ -3,7 +3,7 @@ import UpdateApplicantForm from './UpdateApplicantForm'
 const UpdateApplicant = () => {
     return (
         <>
-            <div>
+            <div> 
                 <UpdateApplicantForm />
             </div>
         </> 

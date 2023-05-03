@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button'; 
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
 
 function ConfirmModel({ _id, commentId, commentOne }) {
     const [show, setShow] = useState(false);
@@ -14,7 +15,10 @@ function ConfirmModel({ _id, commentId, commentOne }) {
             commentId: commentId,
             comment: commentP
         })
-            .then(res => window.location.reload(false))
+            .then(res =>{
+                // window.location.reload(false)
+
+            })
             .catch(err => console.log(err.message))
     }
     console.log(_id, commentId, commentOne)

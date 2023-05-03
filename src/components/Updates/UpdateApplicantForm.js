@@ -21,10 +21,10 @@ const UpdateApplicantForm = () => {
     return (
         <div className='container p-4'>
             <CCardHeader className='text-center'>
-                Update Applicant Status
+                Change Status of the Applicant
             </CCardHeader><br />
             {
-                Object.keys(appDetails).length > 0 ? <UpdateStatus details={appDetails} /> :
+                Object.keys(appDetails).length > 0 ? <UpdateStatus applicantdetails ={appDetails} /> :
                     <div>
                         <form onSubmit={handleSubmit}>
                             <div>

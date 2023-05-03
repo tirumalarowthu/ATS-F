@@ -5,11 +5,11 @@ import Homepage from './components/Homepage';
 import { useState } from 'react';
 import UpdateApplicant from './components/Updates/UpdateApplicant';
 import AddApplicant from './components/ApplicantComponents/AddApplicant';
-import FullDetails from './components/ApplicantComponents/FullDetails';
 import Header from './components/Header';
 import UpdateOneApp from './components/Updates/UpdateOneApp';
 import Forgot from './components/Forgot';
 import RegistrationForm from './FormValidations';
+import SingleApplicantView from './components/ApplicantComponents/SingleApplicantView';
 
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem("AdminInfo"))
@@ -20,9 +20,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} ></Route>
           <Route path="/addApplicant" element={<AddApplicant />}></Route>
-          <Route path="/updateApplicant" element={<UpdateApplicant />}></Route>
+          <Route path="/ChangeApplicantStatus" element={<UpdateApplicant />}></Route>
           <Route path="/update/one" element={<UpdateOneApp />} ></Route>
-          <Route path="/fullview" element={<FullDetails />}></Route>
+          <Route path="/view/:id" element={<SingleApplicantView />}></Route>
           <Route path='/valid' element={<RegistrationForm />}></Route>
 
         </Routes>

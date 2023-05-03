@@ -20,8 +20,8 @@ const Pagination = props => {
 
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <div className='container'>
-    <ul className='d-flex justify-content-center'>
+    <div className=''>
+      <ul className='d-flex justify-content-center border border-2'>
       <li style={{listStyleType:'none'}} disabled={currentPage === 1} onClick={onPrevious}>
         <div className='btn btn-light m-2' disabled={currentPage === 1}>prev</div>
       </li>

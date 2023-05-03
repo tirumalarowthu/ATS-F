@@ -34,7 +34,7 @@ const UpdateOneApp = () => {
                     <button className='btn btn-primary mt-2' >Get Details</button>
                 </form>
                 {
-                    Object.keys(data).length > 0 ? <UpdateStatus details={data} /> : null
+                    Object.keys(data).length > 0 ? <UpdateStatus applicantdetails={data} /> : null
                 }
             </div>
         </>
