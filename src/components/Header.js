@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const Header = () => {
     const [isFixed, setIsFixed] = useState(false);
     const navigate = useNavigate()
@@ -14,7 +14,7 @@ const Header = () => {
     // Function to handle scroll event and update state
     const handleScroll = () => {
         if (window.pageYOffset > 0) {
-            setIsFixed(true);
+            setIsFixed(true);   
         } else {
             setIsFixed(false);
         }
@@ -32,11 +32,11 @@ const Header = () => {
             <Navbar.Toggle aria-controls="navbar-nav" />
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link className='text-white' href="/addApplicant">Add Applicant</Nav.Link>
-                    <Nav.Link className='text-white' href="/update/one">Change Applicant Status</Nav.Link>
+                    <Link className='text-white' href="/addApplicant">Add Applicant</Link>
+                    <Link className='text-white' href="/update/one">Change Applicant Status</Link>
                 </Nav>
                 <Nav>
-                    <Nav.Link className='text-white' onClick={logout} >Logout</Nav.Link>
+                    <Link className='text-white' onClick={logout} >Logout</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
