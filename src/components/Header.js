@@ -32,8 +32,8 @@ const Header = () => {
             <Navbar.Toggle aria-controls="navbar-nav" />
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="mr-auto">
-                    <Link className='text-white' href="/addApplicant">Add Applicant</Link>
-                    <Link className='text-white' href="/update/one">Change Applicant Status</Link>
+                    <Link className='text-white' to="/addApplicant">Add Applicant</Link>
+                    <Link className='text-white' to="/update/one">Change Applicant Status</Link>
                 </Nav>
                 <Nav>
                     <Link className='text-white' onClick={logout} >Logout</Link>
