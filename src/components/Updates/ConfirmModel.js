@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button'; 
+import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,14 +10,14 @@ function ConfirmModel({ _id, commentId, commentOne }) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleEdit = async () => {
-        await axios.patch("http://localhost:9001/comment", {
+        await axios.patch("https://ats-b.vercel.app/comment", {
             id: _id,
             commentId: commentId,
             comment: commentP
         })
-            .then(res =>{
+            .then(res => {
                 // window.location.reload(false)
-
+                console.log("status changed")
             })
             .catch(err => console.log(err.message))
     }

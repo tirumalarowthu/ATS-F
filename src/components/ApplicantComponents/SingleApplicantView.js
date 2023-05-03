@@ -5,15 +5,15 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { DeleteModel } from './DeleteModel'
 import { useParams } from 'react-router-dom'
-const changeDoneBy = JSON.parse(localStorage.getItem("AdminInfo")).name
 const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
 const owners = ["Bhavya", "Hari", "Veera", "Rathakar", "Balaji"]
 const SingleApplicantView = () => {
     const [appData, setAppData] = useState({})
+    const changeDoneBy = localStorage.getItem("AdminInfo") ? JSON.parse(localStorage.getItem("AdminInfo")).name : "Bhavya"
     const { id } = useParams()
     const dispatch = useDispatch()
     useEffect(() => {
-        axios.get(`http://localhost:9001/applicant/id/${id}`).then(res=>setAppData(res.data)).catch(err=>console.log(err.message))
+        axios.get(`https://ats-b.vercel.app/applicant/id/${id}`).then(res => setAppData(res.data)).catch(err => console.log(err.message))
         // dispatch(GetApplicantById(id)).then(res => setAppData(res.payload))
     }, [dispatch, id])
     const [update, setUpdate] = useState(false)
@@ -32,7 +32,7 @@ const SingleApplicantView = () => {
             const data = {
                 ...postData, email: document.getElementById("emailId").value, cRound: document.getElementById("cRound").value
             }
-            await axios.put("http://localhost:9001/appicant/update/comments", data, config)
+            await axios.put("https://ats-b.vercel.app/appicant/update/comments", data, config)
                 .then((res) => {
                     alert("status of updated successfully")
                     window.location.reload(false)
@@ -77,7 +77,7 @@ const SingleApplicantView = () => {
     }
     ///delete Applicant 
     const deleteApplicant = async () => {
-        await axios.delete(`http://localhost:9001/applicant/delete/${appData._id}`)
+        await axios.delete(`https://ats-b.vercel.app/applicant/delete/${appData._id}`)
             .then(res => {
                 alert(`Applicant ${appData.name} deleted successfully`)
                 window.location.reload(false)

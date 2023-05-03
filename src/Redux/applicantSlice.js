@@ -9,7 +9,7 @@ const initialState = {
 export const fetchApplicants = createAsyncThunk("applicant slice", async () => {
     try {
 
-        const data = await axios.get("http://localhost:9001/allApplicants").then(res => res.data)
+        const data = await axios.get("https://ats-b.vercel.app/allApplicants").then(res => res.data)
         // console.log(data)
         return data
 

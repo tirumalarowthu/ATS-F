@@ -10,6 +10,7 @@ import UpdateOneApp from './components/Updates/UpdateOneApp';
 import Forgot from './components/Forgot';
 import RegistrationForm from './FormValidations';
 import SingleApplicantView from './components/ApplicantComponents/SingleApplicantView';
+import Welcome from './Welcome';
 
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem("AdminInfo"))
@@ -27,10 +28,10 @@ function App() {
 
         </Routes>
       </BrowserRouter> : <BrowserRouter>
+      <Welcome/>
         <Routes>
           <Route path='/' element={<Login setIsLogin={setIsLogin} />}></Route>
           <Route path='/forgot' element={<Forgot />}></Route>
-
         </Routes>
       </BrowserRouter>}
 

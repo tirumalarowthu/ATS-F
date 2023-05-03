@@ -2,12 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:9001/",
-  "options": {
-    "allowedHosts": [
-      "http://localhost:9001/"
-    ]
-  },
   "dependencies": {
     "@coreui/react": "^4.7.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",

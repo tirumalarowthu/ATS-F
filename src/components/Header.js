@@ -36,7 +36,7 @@ const Header = () => {
                     <Link className='text-white text-decoration-none ' to="/update/one">Change Applicant Status</Link>
                 </Nav>
                 <Nav>
-                    <Link className='text-white text-decoration-none' to="/" onClick={logout} >Logout</Link>
+                    <Link className='text-white text-decoration-none' onClick={logout} >Logout</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

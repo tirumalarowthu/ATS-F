@@ -93,7 +93,7 @@ const AddApplicant = () => {
     e.preventDefault();
     if (validate()) {
       console.log(formData)
-      await axios.post("http://localhost:9001/applicant/add", formData)
+      await axios.post("https://ats-b.vercel.app/applicant/add", formData)
         .then(res =>{
           dispatch(fetchApplicants())
           window.location.reload(false)
