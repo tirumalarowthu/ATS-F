@@ -27,16 +27,16 @@ const Header = () => {
     }, []);
 
     return (
-        <Navbar bg="info" variant="dark" expand="lg" fixed={isFixed ? 'top' : ''}>
+        <Navbar style={{fontWeight:"600",padding:"10px"}} bg="info" variant="dark" expand="lg" fixed={isFixed ? 'top' : ''}>
             <Navbar.Brand href="/">Home</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav" />
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="mr-auto">
-                    <Link className='text-white' to="/addApplicant">Add Applicant</Link>
-                    <Link className='text-white' to="/update/one">Change Applicant Status</Link>
+                    <Link className='text-white text-decoration-none mr-2' to="/addApplicant">Add Applicant</Link>
+                    <Link className='text-white text-decoration-none ' to="/update/one">Change Applicant Status</Link>
                 </Nav>
                 <Nav>
-                    <Link className='text-white' onClick={logout} >Logout</Link>
+                    <Link className='text-white text-decoration-none' onClick={logout} >Logout</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
