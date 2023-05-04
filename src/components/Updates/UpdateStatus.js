@@ -4,12 +4,15 @@ import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { GetApplicant } from '../../Redux/updateApplicantSlice'
 import { fetchApplicants } from '../../Redux/applicantSlice'
+import { useNavigate } from 'react-router-dom'
 const UpdateStatus = ({applicantdetails}) => {
     const changeDoneBy = JSON.parse(localStorage.getItem("AdminInfo")).name
     const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
     const owners = ["Bhavya", "Hari", "Veera", "Rathakar", "Balaji"]
+    const navigate=useNavigate()
     // const [update, setUpdate] = useState(false)
     const [errors, setErrors] = useState({})
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
     const [postData, setPostData] = useState({
         email: applicantdetails.email,
@@ -21,18 +24,23 @@ const UpdateStatus = ({applicantdetails}) => {
     })
     const handleUpdateApplicantStatus = async (e) => {
         e.preventDefault()
+        setLoading(true)
         validForm()
         if (validForm() === true) {
             const config = { headers: { "Content-Type": "Application/json" } }
             await axios.put("https://ats-b.vercel.app/appicant/update/comments", postData, config)
                 .then((res) => {
-                    toast.success("status updated successfully")
+                    toast.success(`${applicantdetails.name} status updated successfully`)
                     dispatch(fetchApplicants())
                     dispatch(GetApplicant(""))
+                    navigate("/")
+                    setLoading(false)
                 }).catch((err) => {
                     toast.info("Unable to update now ! try after some time")
+                    setLoading(false)
                 })
         }
+        setLoading(false)
     }
     //Handling input Change 
     const handleInputChange = (e) => {
@@ -123,7 +131,11 @@ const UpdateStatus = ({applicantdetails}) => {
 
 
                   <div>
-                      <button className='btn btn-primary'>Change Status</button>
+                      {
+                          loading ? <button className="btn btn-info" type="button" disabled>
+                              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Change status... </button>
+                              : <button type="submit" className="btn btn-primary" disabled={loading}>Change Status</button>
+                      }
                   </div>
               </form>
           </div>

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import axios from "axios"
 import { useDispatch } from 'react-redux';
 import { fetchApplicants } from '../../Redux/applicantSlice';
+import { useNavigate } from 'react-router-dom';
 const roles = ['MERN Stack Developer', 'Frontend React JS Developer', 'Backend Node Js Developer', 'Software Python/Java Tester', 'Full Stack Java Developer', 'Full Stack Python Developer'];
-const qualifications = ['Master of Engineering','Master of Technology', 'Bachelor of Engineering','Bachelor of Technology', "Bachelor's degree", "Others"];
-const branches = ['Computer Science', 'Information Technology', 'Electronics and Communication','Others'];
+const qualifications = ['Master of Engineering', 'Master of Technology', 'Bachelor of Engineering', 'Bachelor of Technology', "Bachelor's degree", "Others"];
+const branches = ['Computer Science', 'Information Technology', 'Electronics and Communication', 'Others'];
 const AddApplicant = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
+  const navigate=useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,8 +23,9 @@ const AddApplicant = () => {
     previousCompany: '',
     experience: '0'
   });
-
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
 
   const validate = () => {
     let errors = {};
@@ -45,10 +48,10 @@ const AddApplicant = () => {
     }
     if (!formData.collegeName) {
       errors.collegeName = 'College name is required';
-    } 
-    // else if (!/^[a-zA-Z]+$/.test(formData.collegeName)) {
-    //   errors.collegeName = 'Enter valid college name'
-    // }
+    } else if (!/^[A-Za-z ]+$/.test(formData.collegeName)) {
+      errors.collegeName = "College name should only contain alphabets and spaces";
+    }
+
     if (!formData.qualification) {
       errors.qualification = 'Qualification is required';
     }
@@ -65,9 +68,12 @@ const AddApplicant = () => {
     }
     if (!formData.resumeLink) {
       errors.resumeLink = 'Resume link is required';
-    } else if (!/^https?:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view\?usp=sharing$/.test(formData.resumeLink)) {
-      errors.resumeLink = 'Invalid Resume link';
+    } else if (!/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(formData.resumeLink)) {
+      errors.resumeLink = "Resume link should be a valid URL";
     }
+    //  if (!/^https?:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view\?usp=sharing+$/.test(formData.resumeLink)) {
+    //   errors.resumeLink = 'Invalid Resume link';
+    // }
     if (formData.isExperienced === "") {
       errors.isExperienced = 'Please confirm whether applicant have experience or not'
     }
@@ -88,24 +94,27 @@ const AddApplicant = () => {
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     if (validate()) {
       console.log(formData)
-      // await axios.post("http://localhost:9005/applicant/add",formData)
-
       await axios.post("https://ats-b.vercel.app/applicant/add", formData)
-        .then(res =>{
+        .then(res => {
           dispatch(fetchApplicants())
-          alert(`New Applicant Added Successfully`)
-          window.location.reload(false)
+          alert(`New Applicant ${formData.name} Added Successfully`)
+          // window.location.reload(false)
+          navigate("/")
+          setLoading(false)
         })
-        .catch(err =>{
+        .catch(err => {
           alert(`${formData.email} already exits! Please enter new email`)
-          setErrors({email:"Applicant already exits with email! Please try with another email"})
+          setErrors({ email: "Applicant already exits with email! Please try with another email" })
+          setLoading(false)
         })
     }
+    setLoading(false)
   };
 
   return (
@@ -202,7 +211,11 @@ const AddApplicant = () => {
             </div>
           </>
         )}
-        <button type="submit" className="btn btn-primary">Add Applicant</button>
+        {
+          loading ? <button className="btn btn-info" type="button" disabled>
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Adding Applicant... </button>
+            : <button type="submit" className="btn btn-primary" disabled={loading}>Add Applicant</button>
+        }
       </form>
     </div>
 

@@ -2,10 +2,11 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-
+import "./LoginStyles.css"
 const Login = ({ setIsLogin }) => {
     const [formData, setFormData] = useState({})
     const [errors, setErrors] = useState({})
+    const [loading, setLoading] = useState(false)
     //code for update the formdata
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -13,6 +14,7 @@ const Login = ({ setIsLogin }) => {
     const navigate = useNavigate()
     ///code for login
     const handleLogin = async () => {
+        setLoading(true)
         validateForm()
         const config = { headers: { "Content-Type": "Application/json" } }
         if (validateForm() === true) {
@@ -22,12 +24,15 @@ const Login = ({ setIsLogin }) => {
                     toast.success(`Welcome to ${res.data.name}`)
                     setIsLogin(true)
                     navigate("/")
+                    setLoading(false)
                 })
                 .catch(err =>{
                     setErrors(err.response.data)
                     console.log(err.message)
+                    setLoading(false)
                 } )
         }
+        setLoading(false)
     }
 
     const validateForm = () => {
@@ -56,7 +61,7 @@ const Login = ({ setIsLogin }) => {
        e.target.value !=="" && validateForm()
     }
     return (
-        <div className='w-50 border border-2 p-5 mx-auto my-5'>
+        <div className='loginForm border border-2 p-5 mx-auto my-5'>
             <h4 className='text-center'>Applicant Tracking System</h4>
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="form-group">
@@ -73,8 +78,12 @@ const Login = ({ setIsLogin }) => {
                         errors.password && <p className='text-danger'>{errors.password}</p>
                     }
                 </div>
-
-                <button onClick={handleLogin} type="submit" className="btn btn-primary w-100">Sign in</button>
+                
+                {
+                    loading ? <button className="btn btn-info w-100" type="button" disabled>
+                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Login... </button>
+                        : <button onClick={handleLogin} type="submit" className="btn btn-primary w-100" disabled={loading}>Login</button>
+                }
             </form>
         </div>
     )

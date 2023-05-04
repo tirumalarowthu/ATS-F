@@ -10,6 +10,7 @@ const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", 
 const owners = ["Bhavya", "Hari", "Veera", "Rathakar", "Balaji"]
 const SingleApplicantView = () => {
     const [appData, setAppData] = useState({})
+    const [loading,setLoading]=useState(false)
     const navigator=useNavigate()
     const changeDoneBy = localStorage.getItem("AdminInfo") ? JSON.parse(localStorage.getItem("AdminInfo")).name : "Bhavya"
     const { id } = useParams()
@@ -28,6 +29,7 @@ const SingleApplicantView = () => {
     })
     const handleUpdateApplicantStatus = async (e) => {
         e.preventDefault()
+        setLoading(true)
         validForm()
         if (validForm() === true) {
             const config = { headers: { "Content-Type": "Application/json" } }
@@ -38,12 +40,15 @@ const SingleApplicantView = () => {
                 .then((res) => {
                     alert("status updated successfully")
                     window.location.reload(false)
+                    setLoading(false)
                     // dispatch(fetchApplicants())
                     // dispatch(GetApplicant(""))
                 }).catch((err) => {
                     toast.info("Unable to update now ! try after some time")
+                    setLoading(false)
                 })
         }
+        setLoading(false)
     }
     //Handling input Change 
     const handleInputChange = (e) => {
@@ -313,9 +318,11 @@ const SingleApplicantView = () => {
                                     </div>
 
 
-                                    <div>
-                                        <button className='btn btn-primary'>Change Status</button>
-                                    </div>
+                                    {
+                                        loading ? <button className="btn btn-info" type="button" disabled>
+                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Change status... </button>
+                                            : <button type="submit" className="btn btn-primary" disabled={loading}>Change Status</button>
+                                    }
                                 </form>
                             </CCardBody>}
                         <div className="container mb-2">

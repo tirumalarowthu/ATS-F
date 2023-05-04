@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
+import "./HeaderStyles.css"
 const Header = () => {
     const [isFixed, setIsFixed] = useState(false);
     const navigate = useNavigate()
@@ -28,15 +29,15 @@ const Header = () => {
 
     return (
         <Navbar style={{fontWeight:"600",padding:"10px"}} bg="info" variant="dark" expand="lg" fixed={isFixed ? 'top' : ''}>
-            <Navbar.Brand href="/">Home</Navbar.Brand>
+            <Navbar.Brand className='navLink' href="/">Home</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav" />
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="mr-auto">
-                    <Link className='text-white text-decoration-none mr-2' to="/addApplicant">Add Applicant</Link>
-                    <Link className='text-white text-decoration-none ' to="/update/one">Change Applicant Status</Link>
+                    <Link className='navLink mr-3' to="/addApplicant">Add Applicant</Link>
+                    <Link className='navLink ' to="/update/one">Change Applicant Status</Link>
                 </Nav>
                 <Nav>
-                    <Link className='text-white text-decoration-none' onClick={logout} >Logout</Link>
+                    <Link className='navLink ' onClick={logout} >Logout</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

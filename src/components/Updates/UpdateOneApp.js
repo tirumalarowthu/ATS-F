@@ -26,6 +26,7 @@ const UpdateOneApp = () => {
     }
     return (
         <>
+        <div style={{height:"100vh"}}>
             <div className='container p-2 my-4 border border-2'>
                 <form onSubmit={handleSubmit} className='p-2'>
                     <label>Enter Email of the Applicant</label>
@@ -37,6 +38,8 @@ const UpdateOneApp = () => {
                     Object.keys(data).length > 0 ? <UpdateStatus applicantdetails={data} /> : null
                 }
             </div>
+        </div>
+
         </>
     )
 }
