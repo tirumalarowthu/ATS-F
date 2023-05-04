@@ -4,11 +4,13 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { DeleteModel } from './DeleteModel'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { fetchApplicants } from '../../Redux/applicantSlice'
 const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
 const owners = ["Bhavya", "Hari", "Veera", "Rathakar", "Balaji"]
 const SingleApplicantView = () => {
     const [appData, setAppData] = useState({})
+    const navigator=useNavigate()
     const changeDoneBy = localStorage.getItem("AdminInfo") ? JSON.parse(localStorage.getItem("AdminInfo")).name : "Bhavya"
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -34,7 +36,7 @@ const SingleApplicantView = () => {
             }
             await axios.put("https://ats-b.vercel.app/appicant/update/comments", data, config)
                 .then((res) => {
-                    alert("status of updated successfully")
+                    alert("status updated successfully")
                     window.location.reload(false)
                     // dispatch(fetchApplicants())
                     // dispatch(GetApplicant(""))
@@ -80,7 +82,8 @@ const SingleApplicantView = () => {
         await axios.delete(`https://ats-b.vercel.app/applicant/delete/${appData._id}`)
             .then(res => {
                 alert(`Applicant ${appData.name} deleted successfully`)
-                window.location.reload(false)
+                navigator("/")
+                dispatch(fetchApplicants())
             })
             .catch(err => alert("Unable to delete applicant.Please try after some time."))
     }

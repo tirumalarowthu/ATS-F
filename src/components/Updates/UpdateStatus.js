@@ -26,7 +26,7 @@ const UpdateStatus = ({applicantdetails}) => {
             const config = { headers: { "Content-Type": "Application/json" } }
             await axios.put("https://ats-b.vercel.app/appicant/update/comments", postData, config)
                 .then((res) => {
-                    toast.success(res.data.name + " updated successfully")
+                    toast.success("status updated successfully")
                     dispatch(fetchApplicants())
                     dispatch(GetApplicant(""))
                 }).catch((err) => {
