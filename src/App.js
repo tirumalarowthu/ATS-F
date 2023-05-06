@@ -8,7 +8,6 @@ import AddApplicant from './components/ApplicantComponents/AddApplicant';
 import Header from './components/Header';
 import UpdateOneApp from './components/Updates/UpdateOneApp';
 import Forgot from './components/Forgot';
-import RegistrationForm from './FormValidations';
 import SingleApplicantView from './components/ApplicantComponents/SingleApplicantView';
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem("AdminInfo"))
@@ -22,8 +21,6 @@ function App() {
           <Route path="/ChangeApplicantStatus" element={<UpdateApplicant />}></Route>
           <Route path="/update/one" element={<UpdateOneApp />} ></Route>
           <Route path="/view/:id" element={<SingleApplicantView />}></Route>
-          <Route path='/valid' element={<RegistrationForm />}></Route>
-
         </Routes>
       </BrowserRouter> : <BrowserRouter>
         <Routes>

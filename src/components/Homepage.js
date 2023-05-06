@@ -18,9 +18,6 @@ const Homepage = () => {
       <div>
         <h4 className='text-center p-4'>Welcome to Applicant Tracking System</h4>
       </div>
-      {/* {ApplicantData && ApplicantData.length > 0 ? <div style={{ minHeight: "80vh" }} className='container'>
-        <ApplicantTablePage ApplicantData={ApplicantData} />
-      </div> : null} */}
       {ApplicantData && ApplicantData.length > 0 ? <div style={{ minHeight: "80vh", overflow: "auto" }} className='container'>
         <App ApplicantData={ApplicantData} />
       </div> : null}

@@ -350,58 +350,5 @@ export default SingleApplicantView
 
 // < td > <ConfirmModel _id={appData._id} commentOne={item.comment} commentId={item._id} /></ >
 
-//code pased by veera becarefull
-// {update && <CCardBody>
-//                             <CCardHeader className='text-center '>
-//                                 Change Applicant Status
-//                             </CCardHeader><br />
-//                             <form className='border border-2 p-2' onSubmit={handleUpdateApplicantStatus}>
-//                                 <div className="mb-3">
-//                                     <label>Status of the Applicant :</label>
-//                                     <select className='form-select' onChange={handleInputChange} onFocus={hideErrors} name="status">
-//                                         <option value={appData.status}>{appData.status}</option>
-//                                         <option value="Assignment">Assignment</option>
-//                                         <option value="Technical Round">Technical Round</option>
-//                                         <option value="Final Round">Final Round</option>
-//                                         <option value="Rejected">Rejected</option>
-//                                     </select>
-//                                     {errors.status ? <p className='text-danger'>{errors.status}</p> : null}
-//                                 </div>
-//                                 <div className="mb-3">
-//                                     <label>Next Round Owner :</label>
-//                                     <select className='form-select' value={postData.nextRound} onChange={handleInputChange} onFocus={hideErrors} name="nextRound">
-//                                         <option disabled>--choose Next Round Owner--</option>
-//                                         <option value="Bhavya">Bhavya</option>
-//                                         <option value="Veera">Veera</option>
-//                                         <option value="Rathnakar">Rathnakar</option>
-//                                         <option value="Balaji">Balaji</option>
-//                                     </select>
-//                                     {errors.nextRound ? <p className='text-danger'>{errors.nextRound}</p> : null}
-//                                 </div>
-//                                 <div className="mb-3">
-//                                     <label>Comments for the Round :</label>
-//                                     <input className='form-control' name='cRound' value={appData.status} readOnly onChange={handleInputChange} type="text" />
-//                                 </div>
-//                                 <div className="mb-3">
-//                                     <label>Comment By :</label>
-//                                     <select className='form-select' name='commentBy' onChange={handleInputChange} onFocus={hideErrors} type="text">
-//                                         <option value="">--Choose Comment By --</option>
-//                                         <option value="Bhavya">Bhavya</option>
-//                                         <option value="Veera">Veera</option>
-//                                         <option value="Rathnakar">Rathnakar</option>
-//                                         <option value="Balaji">Balaji</option>
-//                                     </select>
-//                                     {errors.commentBy ? <p className='text-danger'>{errors.commentBy}</p> : null}
-//                                 </div>
-//                                 <div className="mb-3">
-//                                     <label>Comments :</label>
-//                                     <input className='form-control' name="comment" value={postData.comment} onFocus={hideErrors} onChange={handleInputChange} type="text" />
-//                                     {errors.comment ? <p className='text-danger'>{errors.comment}</p> : null}
-//                                 </div>
-//                                 <div>
-//                                     <button className='btn btn-primary'>Change Status</button>
-//                                 </div>
-//                             </form>
-//                         // </CCardBody>} 
 
 
