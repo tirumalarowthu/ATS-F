@@ -36,8 +36,11 @@ const Header = () => {
                     <Link className='navLink mr-3' to="/addApplicant">Add Applicant</Link>
                     <Link className='navLink ' to="/update/one">Change Applicant Status</Link>
                 </Nav>
+                <Nav className="mr-3">
+                    Welcome to {localStorage.getItem("AdminInfo")&& JSON.parse(localStorage.getItem("AdminInfo")).name}  
+                </Nav>
                 <Nav>
-                    <Link className='navLink ' onClick={logout} >Logout</Link>
+                    <Link className='navLink' onClick={logout} >Logout</Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

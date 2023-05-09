@@ -249,8 +249,9 @@ const SingleApplicantView = () => {
                                                 <thead className='bg-dark text-white'>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Comment Round</th>
+                                                        <th>Round</th>
                                                         <th>Updated By</th>
+                                                        <th>Date/Time</th>
                                                         <th>Comments</th>
                                                     </tr>
                                                 </thead>
@@ -261,6 +262,7 @@ const SingleApplicantView = () => {
                                                                 <td>{index + 1}</td>
                                                                 <td>{item.cRound}</td>
                                                                 <td>{item.commentBy}</td>
+                                                                <td>{Date().slice(0,25)}</td>
                                                                 <td>{item.comment}</td>
                                                             </tr>)
                                                     }

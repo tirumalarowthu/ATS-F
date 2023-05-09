@@ -48,7 +48,7 @@ const AddApplicant = () => {
     }
     if (!formData.collegeName) {
       errors.collegeName = 'College name is required';
-    } else if (!/^[A-Za-z ]+$/.test(formData.collegeName)) {
+    } else if (!/^[A-Za-z ]+$/.test(formData.collegeName.trim())) {
       errors.collegeName = "College name should only contain alphabets and spaces";
     }
 
@@ -68,7 +68,7 @@ const AddApplicant = () => {
     }
     if (!formData.resumeLink) {
       errors.resumeLink = 'Resume link is required';
-    } else if (!/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(formData.resumeLink)) {
+    } else if (!/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(formData.resumeLink.trim())) {
       errors.resumeLink = "Resume link should be a valid URL";
     }
     //  if (!/^https?:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view\?usp=sharing+$/.test(formData.resumeLink)) {
@@ -80,6 +80,8 @@ const AddApplicant = () => {
     if (formData.isExperienced === 'yes') {
       if (!formData.previousCompany) {
         errors.previousCompany = 'Previous company name is required';
+      } else if (!/^[a-zA-Z ]+$/.test(formData.previousCompany.trim())){
+        errors.previousCompany ='Previous company should only contain alphabets and spaces'
       }
       if (!formData.experience || formData.experience === "0") {
         errors.experience = 'Total  experience is required';

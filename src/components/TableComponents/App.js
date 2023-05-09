@@ -99,6 +99,14 @@ const App = ({ ApplicantData }) => {
         Cell: (cellProps) => {
           return <span ><p>{cellProps.value.substr(0, 10)}</p></span>
         }
+      },
+      {
+        Header: 'UpdatedOn',
+        accessor: 'updatedAt',
+        disableFilters: true,
+        Cell: (cellProps) => {
+          return <span ><p>{cellProps.value.substr(0, 10)}</p></span>
+        }
 
       }
     ],
