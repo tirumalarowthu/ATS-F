@@ -31,7 +31,7 @@ const AddApplicant = () => {
     let errors = {};
     if (!formData.name) {
       errors.name = 'Name is required';
-    } else if (!/^[a-zA-Z ]+$/.test(formData.name)) {
+    } else if (!/^[a-zA-Z ]+$/.test(formData.name.trim())) {
       errors.name = 'Name should contain only alphabets and spaces';
     }
     if (!formData.email) {
