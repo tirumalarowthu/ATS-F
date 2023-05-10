@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 const UpdateStatus = ({applicantdetails}) => {
     const changeDoneBy = JSON.parse(localStorage.getItem("AdminInfo")).name
     const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-    const owners = ["Bhavya", "Hari", "Veera", "Rathakar", "Balaji"]
+    const owners = ["Bhavya", "Veera", "Rathakar","Ranjith", "Balaji"]
     const navigate=useNavigate()
     // const [update, setUpdate] = useState(false)
     const [errors, setErrors] = useState({})

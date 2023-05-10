@@ -7,7 +7,7 @@ import { DeleteModel } from './DeleteModel'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-const owners = ["Bhavya", "Hari", "Veera", "Rathakar", "Balaji"]
+const owners = ["Bhavya","Veera", "Rathakar","Ranjith","Balaji"]
 const SingleApplicantView = () => {
     const [appData, setAppData] = useState({})
     const [loading,setLoading]=useState(false)
