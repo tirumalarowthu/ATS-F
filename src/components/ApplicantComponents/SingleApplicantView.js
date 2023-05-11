@@ -36,9 +36,10 @@ const SingleApplicantView = () => {
             const data = {
                 ...postData, email: document.getElementById("emailId").value, cRound: document.getElementById("cRound").value
             }
+            // await axios.put("http://localhost:9005/appicant/update/comments", data, config)
 
-            // await axios.put("https://ats-b.vercel.app/appicant/update/comments", data, config)
-            await axios.put("http://localhost:9005/appicant/update/comments", data, config)
+
+            await axios.put("https://ats-b.vercel.app/appicant/update/comments", data, config)
                 .then((res) => {
                     alert("status updated successfully")
                     window.location.reload(false)
@@ -253,7 +254,7 @@ const SingleApplicantView = () => {
                                                         <th>#</th>
                                                         <th>Round</th>
                                                         <th>Updated By</th>
-                                                        <th>Date/Time</th>
+                                                        <th>Updated At</th>
                                                         <th>Comments</th>
                                                     </tr>
                                                 </thead>
@@ -264,7 +265,7 @@ const SingleApplicantView = () => {
                                                                 <td>{index + 1}</td>
                                                                 <td>{item.cRound}</td>
                                                                 <td>{item.commentBy}</td>
-                                                                <td>{item.Date.slice(0,25)}</td>
+                                                                <td>{new Date(item.Date).toString().substring(0, 25)}</td>
                                                                 <td>{item.comment}</td>
                                                             </tr>)
                                                     }
