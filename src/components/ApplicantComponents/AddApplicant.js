@@ -26,7 +26,7 @@ const AddApplicant = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-
+////validations for form
   const validate = () => {
     let errors = {};
     if (!formData.name) {
@@ -92,21 +92,23 @@ const AddApplicant = () => {
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
-
+///updating the state
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+///Adding the applicant through submit button
   const handleSubmit = async (e) => {
     e.preventDefault();
+    var success=false;
     setLoading(true)
     if (validate()) {
       console.log(formData)
-      await axios.post("https://ats-b.vercel.app/applicant/add", formData)
+    await axios.post("https://ats-b.vercel.app/applicant/add", formData)
         .then(res => {
           dispatch(fetchApplicants())
           alert(`New Applicant ${formData.name} Added Successfully`)
           // window.location.reload(false)
+          success=true
           navigate("/")
           setLoading(false)
         })
@@ -115,6 +117,8 @@ const AddApplicant = () => {
           setErrors({ email: "Applicant already exits with email! Please try with another email" })
           setLoading(false)
         })
+      success && await axios.post(`https://ats-b.vercel.app/add/send/${formData.name}`)
+      .then(res=>alert(`Email send successfully`)).catch(err=>alert("failed to send email"))
     }
     setLoading(false)
   };
