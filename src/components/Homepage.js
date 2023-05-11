@@ -18,9 +18,12 @@ const Homepage = () => {
       <div>
         <h4 className='text-center p-4'>Welcome to Applicant Tracking System</h4>
       </div>
+      {
+        // ApplicantData.length
+      }
       {ApplicantData && ApplicantData.length > 0 ? <div style={{ minHeight: "80vh", overflow: "auto" }} className='container'>
         <App ApplicantData={ApplicantData} />
-      </div> : null}
+      </div> : <div style={{minHeight:"80vh"}} className='text-center'>Applicants are loading.....</div>}
       <div>
         <Footer />
       </div>

@@ -3,7 +3,7 @@ import axios from "axios"
 import { useDispatch } from 'react-redux';
 import { fetchApplicants } from '../../Redux/applicantSlice';
 import { useNavigate } from 'react-router-dom';
-const roles = ['MERN Stack Developer', 'Frontend React JS Developer', 'Backend Node Js Developer', 'Software Python/Java Tester', 'Full Stack Java Developer', 'Full Stack Python Developer'];
+const roles = ['MERN Stack Developer', 'React JS Developer', 'Node Js Developer', 'Python/Java Tester', 'Java Developer', 'Python Developer'];
 const qualifications = ['Master of Engineering', 'Master of Technology', 'Bachelor of Engineering', 'Bachelor of Technology', "Bachelor's degree", "Others"];
 const branches = ['Computer Science', 'Information Technology', 'Electronics and Communication', 'Others'];
 const AddApplicant = () => {
