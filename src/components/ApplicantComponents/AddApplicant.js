@@ -8,7 +8,7 @@ const qualifications = ['Master of Engineering', 'Master of Technology', 'Bachel
 const branches = ['Computer Science', 'Information Technology', 'Electronics and Communication', 'Others'];
 const AddApplicant = () => {
   const dispatch = useDispatch()
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,7 +26,7 @@ const AddApplicant = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-////validations for form
+  ////validations for form
   const validate = () => {
     let errors = {};
     if (!formData.name) {
@@ -80,35 +80,37 @@ const AddApplicant = () => {
     if (formData.isExperienced === 'yes') {
       if (!formData.previousCompany) {
         errors.previousCompany = 'Previous company name is required';
-      } else if (!/^[a-zA-Z ]+$/.test(formData.previousCompany.trim())){
-        errors.previousCompany ='Previous company should only contain alphabets and spaces'
+      } else if (!/^[a-zA-Z0-9 ]+$/.test(formData.previousCompany.trim())) {
+        errors.previousCompany = 'Previous company should only contain alphabets and spaces'
       }
       if (!formData.experience || formData.experience === "0") {
-        errors.experience = 'Total  experience is required';
+        errors.experience = 'Total experience is required';
       } else if (!/^[0-9]+$/.test(formData.experience)) {
         errors.experience = 'Years of experience should contain only digits';
+      } else if (formData.experience < 0 || formData.experience > 20) {
+        errors.experience = "Maximum experience is limited to 30 years"
       }
     }
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
-///updating the state
+  ///updating the state
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-///Adding the applicant through submit button
+  ///Adding the applicant through submit button
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var success=false;
+    var success = false;
     setLoading(true)
     if (validate()) {
       console.log(formData)
-    await axios.post("https://ats-b.vercel.app/applicant/add", formData)
+      await axios.post("https://ats-b.vercel.app/applicant/add", formData)
         .then(res => {
           dispatch(fetchApplicants())
           alert(`New Applicant ${formData.name} Added Successfully`)
           // window.location.reload(false)
-          success=true
+          success = true
           navigate("/")
           setLoading(false)
         })
@@ -118,7 +120,7 @@ const AddApplicant = () => {
           setLoading(false)
         })
       success && await axios.post(`https://ats-b.vercel.app/add/send/${formData.name}`)
-      .then(res=>alert(`Email send successfully`)).catch(err=>alert("failed to send email"))
+        .then(res => alert(`Email send successfully`)).catch(err => alert("failed to send email"))
     }
     setLoading(false)
   };

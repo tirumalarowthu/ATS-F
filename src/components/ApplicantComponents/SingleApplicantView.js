@@ -24,7 +24,7 @@ const SingleApplicantView = () => {
     const [postData, setPostData] = useState({
         commentBy: changeDoneBy,
         comment: "",
-        status: appData.status,
+        status:"",
         nextRound: ""
     })
     const handleUpdateApplicantStatus = async (e) => {
@@ -62,19 +62,22 @@ const SingleApplicantView = () => {
     const validForm = () => {
         let isValid = true
         let errors = {}
-        if (postData.status === appData.status) {
+        if (postData.status === appData.status || postData.status==="") {
             errors["status"] = "Please update the status of the applicant."
             isValid = false
         }
-        if (!postData.comment) {
+        if (!postData.comment ||postData.comment.trim()==="") {
             errors["comment"] = "Please write comments for the applicant."
             isValid = false
+        }else if(!/^[a-zA-Z0-9 ]+$/.test(postData.comment.trim())){
+            errors["comment"]="Ple"
+            isValid=false
         }
         if (!postData.commentBy || postData.commentBy === "") {
             errors["commentBy"] = "Please choose commented one."
             isValid = false
         }
-        if (!postData.nextRound) {
+        if (!postData.nextRound ||postData.nextRound==="") {
             errors["nextRound"] = "Please choose next round  owner."
             isValid = false
         }
@@ -308,7 +311,7 @@ const SingleApplicantView = () => {
                                         <label className="col-sm-3 col-form-label">New Owner:</label>
                                         <div className="col-sm-9">
                                             <select className='form-select' value={postData.nextRound} onChange={handleInputChange} onFocus={hideErrors} name="nextRound">
-                                                <option >--Choose new owner--</option>
+                                                <option value="" >--Choose new owner--</option>
                                                 {owners && owners.map(o => <option key={o} value={o}>{o}</option>)}
                                             </select>
                                             {errors.nextRound ? <p className='text-danger'>{errors.nextRound}</p> : null}
