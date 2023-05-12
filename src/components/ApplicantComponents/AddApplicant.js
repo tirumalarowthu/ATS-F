@@ -101,26 +101,27 @@ const AddApplicant = () => {
   ///Adding the applicant through submit button
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var success = false;
     setLoading(true)
     if (validate()) {
       console.log(formData)
-      await axios.post("https://ats-b.vercel.app/applicant/add", formData)
-        .then(res => {
+      try{
+        await axios.post("https://ats-b.vercel.app/applicant/add", formData)
+        try{
           dispatch(fetchApplicants())
           alert(`New Applicant ${formData.name} Added Successfully`)
-          // window.location.reload(false)
-          success = true
+          setLoading(false)
+          await axios.post(`https://ats-b.vercel.app/add/send/${formData.name}`)
+          alert('Email send successfully')
           navigate("/")
-          setLoading(false)
-        })
-        .catch(err => {
-          alert(`${formData.email} already exits! Please enter new email`)
-          setErrors({ email: "Applicant already exits with email! Please try with another email" })
-          setLoading(false)
-        })
-      success && await axios.post(`https://ats-b.vercel.app/add/send/${formData.name}`)
-        .then(res => alert(`Email send successfully`)).catch(err => alert("failed to send email"))
+        }catch(err){
+          alert("Failed to send email.")
+          navigate("/")
+        }
+      }catch(err){
+        console.log(err)
+        setErrors(err.response.data)
+        alert(err.response.data.email || "Unable to add applicant now!Try after some time.")
+      }
     }
     setLoading(false)
   };
