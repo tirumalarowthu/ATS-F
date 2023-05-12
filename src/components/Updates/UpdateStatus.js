@@ -2,16 +2,14 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { GetApplicant } from '../../Redux/updateApplicantSlice'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 import { useNavigate } from 'react-router-dom'
 const UpdateStatus = ({ applicantdetails }) => {
     const changeDoneBy = JSON.parse(localStorage.getItem("AdminInfo")).name
     const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-    const owners = ["Bhavya", "Veera", "Rathakar", "Ranjith", "Balaji"]
+    const owners = ["Bhavya", "Veera", "Rathnakaran", "Ranjith", "Balaji"]
     const navigate = useNavigate()
-    // const [update, setUpdate] = useState(false)
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({}) 
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
     const [postData, setPostData] = useState({
@@ -28,17 +26,24 @@ const UpdateStatus = ({ applicantdetails }) => {
         validForm()
         if (validForm() === true) {
             const config = { headers: { "Content-Type": "Application/json" } }
-            await axios.put("https://ats-b.vercel.app/appicant/update/comments", postData, config)
-                .then((res) => {
+            try {
+                await axios.put("https://ats-b.vercel.app/appicant/update/comments", postData, config)
+                try {
                     toast.success(`${applicantdetails.name} status updated successfully`)
                     dispatch(fetchApplicants())
-                    dispatch(GetApplicant(""))
+                    await axios.post(`https://ats-b.vercel.app/change/${postData.nextRound}/${applicantdetails.name}`)
+                    alert(`Email send to ${postData.nextRound} successfully`)
+                    navigate("/")
+                } catch (err) {
+                    alert("Failed to send email.")
                     navigate("/")
                     setLoading(false)
-                }).catch((err) => {
-                    toast.info("Unable to update now ! try after some time")
-                    setLoading(false)
-                })
+                }
+            } catch (err) {
+                console.log(err)
+                alert("Unable to change applicant status now!Try after some time.")
+            }
+
         }
         setLoading(false)
     }
@@ -74,15 +79,7 @@ const UpdateStatus = ({ applicantdetails }) => {
     const hideErrors = (e) => {
         setErrors({ ...errors, [e.target.name]: "" })
     }
-    // ///delete Applicant 
-    // const deleteApplicant = async () => {
-    //     await axios.delete(`http://localhost:9001/applicant/delete/${applicantdetails._id}`)
-    //         .then(res => {
-    //             alert(`Applicant ${applicantdetails.name} deleted successfully`)
-    //             window.location.reload(false)
-    //         })
-    //         .catch(err => alert("Unable to delete applicant.Please try after some time."))
-    // }
+    
 
     return (
         <div>

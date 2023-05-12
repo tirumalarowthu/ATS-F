@@ -7,9 +7,9 @@ import { DeleteModel } from './DeleteModel'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-const owners = ["Bhavya", "Veera", "Rathakar", "Ranjith", "Balaji"]
+const owners = ["Bhavya", "Veera", "Rathnakaran", "Ranjith", "Balaji"]
 const SingleApplicantView = () => {
-    const [appData, setAppData] = useState({})
+    const [appData, setAppData] = useState({}) 
     const [loading, setLoading] = useState(false)
     const navigator = useNavigate()
     const changeDoneBy = localStorage.getItem("AdminInfo") ? JSON.parse(localStorage.getItem("AdminInfo")).name : "Bhavya"
@@ -36,20 +36,34 @@ const SingleApplicantView = () => {
             const data = {
                 ...postData, email: document.getElementById("emailId").value, cRound: document.getElementById("cRound").value
             }
-            // await axios.put("http://localhost:9005/appicant/update/comments", data, config)
 
-
-            await axios.put("https://ats-b.vercel.app/appicant/update/comments", data, config)
-                .then((res) => {
-                    alert("status updated successfully")
+            try {
+                await axios.put("https://ats-b.vercel.app/appicant/update/comments", data, config)
+                try {
+                    toast.success(`${appData.name} status updated successfully`)
+                    setLoading(false)
+                    await axios.post(`https://ats-b.vercel.app/change/${data.nextRound}/${appData.name}`)
+                    alert(`Email send to ${postData.nextRound} successfully`)
+                    window.location.reload(false)
+                } catch (err) {
+                    alert("Failed to send email.")
                     window.location.reload(false)
                     setLoading(false)
-                    // dispatch(fetchApplicants())
-                    // dispatch(GetApplicant(""))
-                }).catch((err) => {
-                    toast.info("Unable to update now ! try after some time")
-                    setLoading(false)
-                })
+                }
+            } catch (err) {
+                console.log(err)
+                alert("Unable to change applicant status now!Try after some time.")
+            }
+                // .then((res) => {
+                //     alert("status updated successfully")
+                //     window.location.reload(false)
+                //     setLoading(false)
+                //     // dispatch(fetchApplicants())
+                //     // dispatch(GetApplicant(""))
+                // }).catch((err) => {
+                //     toast.info("Unable to update now ! try after some time")
+                //     setLoading(false)
+                // })
         }
         setLoading(false)
     }

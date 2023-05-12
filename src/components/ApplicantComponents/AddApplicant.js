@@ -94,7 +94,7 @@ const AddApplicant = () => {
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
-  ///updating the state
+  ///updating the state 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
