@@ -72,7 +72,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
         <Table id="applicantTable" bordered hover {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
+              <tr className='bg-light' {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th className='' {...column.getHeaderProps()}>
                     <div className='d-flex align-items-center' {...column.getSortByToggleProps()}>
