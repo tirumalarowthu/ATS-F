@@ -7,11 +7,11 @@ import { DeleteModel } from './DeleteModel'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-const owners = ["Bhavya","Veera", "Rathakar","Ranjith","Balaji"]
+const owners = ["Bhavya", "Veera", "Rathakar", "Ranjith", "Balaji"]
 const SingleApplicantView = () => {
     const [appData, setAppData] = useState({})
-    const [loading,setLoading]=useState(false)
-    const navigator=useNavigate()
+    const [loading, setLoading] = useState(false)
+    const navigator = useNavigate()
     const changeDoneBy = localStorage.getItem("AdminInfo") ? JSON.parse(localStorage.getItem("AdminInfo")).name : "Bhavya"
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -24,7 +24,7 @@ const SingleApplicantView = () => {
     const [postData, setPostData] = useState({
         commentBy: changeDoneBy,
         comment: "",
-        status:"",
+        status: "",
         nextRound: ""
     })
     const handleUpdateApplicantStatus = async (e) => {
@@ -62,22 +62,22 @@ const SingleApplicantView = () => {
     const validForm = () => {
         let isValid = true
         let errors = {}
-        if (postData.status === appData.status || postData.status==="") {
+        if (postData.status === appData.status || postData.status === "") {
             errors["status"] = "Please update the status of the applicant."
             isValid = false
         }
-        if (!postData.comment ||postData.comment.trim()==="") {
+        if (!postData.comment || postData.comment.trim() === "") {
             errors["comment"] = "Please write comments for the applicant."
             isValid = false
-        }else if(!/^[a-zA-Z0-9 ]+$/.test(postData.comment.trim())){
-            errors["comment"]="Ple"
-            isValid=false
+        } else if (!/^[a-zA-Z0-9 ]+$/.test(postData.comment.trim())) {
+            errors["comment"] = "Ple"
+            isValid = false
         }
         if (!postData.commentBy || postData.commentBy === "") {
             errors["commentBy"] = "Please choose commented one."
             isValid = false
         }
-        if (!postData.nextRound ||postData.nextRound==="") {
+        if (!postData.nextRound || postData.nextRound === "") {
             errors["nextRound"] = "Please choose next round  owner."
             isValid = false
         }
@@ -114,70 +114,25 @@ const SingleApplicantView = () => {
                                         <CFormInput type="text" value={appData.name} readOnly label="Name of the Applicant" />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="email"
-                                            id="emailId"
-                                            value={appData.email}
-                                            readOnly
-                                            name="email"
-                                            label="Email"
-                                        />
+                                        <CFormInput type="email" id="emailId" value={appData.email} readOnly name="email" label="Email" />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="Number"
-                                            name="mobile"
-                                            value={appData.mobile}
-                                            readOnly
-                                            label="Mobile Number"
-                                            required
-                                        />
+                                        <CFormInput type="Number" name="mobile" value={appData.mobile} readOnly label="Mobile Number" required />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            className='form-control'
-                                            name="role"
-                                            value={appData.role}
-                                            readOnly
-                                            label="Applied Role"
-                                        >
-                                        </CFormInput>
+                                        <CFormInput type="text" className='form-control' name="role" value={appData.role} readOnly label="Applied Role" />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="text"
-                                            name="collegeName"
-                                            value={appData.collegeName}
-                                            readOnly
-                                            label="College Name"
-                                        />
+                                        <CFormInput type="text" name="collegeName" value={appData.collegeName} readOnly label="College Name" />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="text"
-                                            name="qualification"
-                                            value={appData.qualification}
-                                            readOnly
-                                            label="Qualification"
-                                        />
+                                        <CFormInput type="text" name="qualification" value={appData.qualification} readOnly label="Qualification" />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="text"
-                                            name="Branch"
-                                            value={appData.branch}
-                                            readOnly
-                                            label="Branch"
-                                        />
+                                        <CFormInput type="text" name="Branch" value={appData.branch} readOnly label="Branch" />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="Number"
-                                            name="passout"
-                                            value={appData.passout}
-                                            readOnly
-                                            label="Passout Year"
-                                        />
+                                        <CFormInput type="Number" name="passout" value={appData.passout} readOnly label="Passout Year" />
                                     </CCol>
                                     {
                                         appData.experience > 0 ? <>
@@ -206,48 +161,18 @@ const SingleApplicantView = () => {
 
 
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="text"
-                                            value={appData.nextRound}
-                                            readOnly
-                                            placeholder="Next Round Owner"
-                                            id="nextRound"
-                                            label="Next Round Owner"
-                                            required
-                                        />
+                                        <CFormInput type="text" value={appData.nextRound} readOnly placeholder="Next Round Owner" id="nextRound" label="Next Round Owner" required />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="text"
-                                            value={appData.status}
-                                            readOnly
-                                            placeholder="Status of the applicant"
-                                            id="status"
-                                            label="Status of the applicant"
-                                            required
-                                        />
+                                        <CFormInput type="text" value={appData.status} readOnly placeholder="Status of the applicant" id="status" label="Status of the applicant" required />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="text"
-                                            value={appData.createdAt.substring(0, 10)}
-
-                                            readOnly
-                                            label="Applied Date"
-                                        />
+                                        <CFormInput type="text" value={new Date(appData.createdAt).toString().substring(0,25)} readOnly label="Applied Date"/>
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput
-                                            type="text"
-                                            onClick={() => window.open(`${appData.resumeLink}`)}
-                                            value={appData.resumeLink}
-                                            style={{ color: "green", cursor: "pointer" }}
-                                            readOnly
-                                            label="Resume Link"
-                                        />
+                                        <CFormInput type="text" onClick={() => window.open(`${appData.resumeLink}`)} value={appData.resumeLink} style={{ color: "green", cursor: "pointer" }} readOnly label="Resume Link" />
                                     </CCol>
                                 </CForm>
-
                                 {
                                     appData.comments.length > 0 ? <>
                                         <div className='overflow-auto'>
