@@ -31,7 +31,7 @@ const UpdateStatus = ({ applicantdetails }) => {
                 try {
                     toast.success(`${applicantdetails.name} status updated successfully`)
                     dispatch(fetchApplicants())
-                    await axios.post(`https://ats-b.vercel.app/change/${postData.nextRound}/${applicantdetails.name}`)
+                    await axios.post(`https://ats-b.vercel.app/change/${postData.commentBy}/${postData.nextRound}/${applicantdetails.name}`)
                     alert(`Email send to ${postData.nextRound} successfully`)
                     navigate("/")
                 } catch (err) {

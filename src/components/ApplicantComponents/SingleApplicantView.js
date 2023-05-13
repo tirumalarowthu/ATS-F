@@ -42,7 +42,7 @@ const SingleApplicantView = () => {
                 try {
                     toast.success(`${appData.name} status updated successfully`)
                     setLoading(false)
-                    await axios.post(`https://ats-b.vercel.app/change/${data.nextRound}/${appData.name}`)
+                    await axios.post(`https://ats-b.vercel.app/change/${data.commentBy}/${data.nextRound}/${appData.name}`)
                     alert(`Email send to ${postData.nextRound} successfully`)
                     window.location.reload(false)
                 } catch (err) {
@@ -54,16 +54,6 @@ const SingleApplicantView = () => {
                 console.log(err)
                 alert("Unable to change applicant status now!Try after some time.")
             }
-                // .then((res) => {
-                //     alert("status updated successfully")
-                //     window.location.reload(false)
-                //     setLoading(false)
-                //     // dispatch(fetchApplicants())
-                //     // dispatch(GetApplicant(""))
-                // }).catch((err) => {
-                //     toast.info("Unable to update now ! try after some time")
-                //     setLoading(false)
-                // })
         }
         setLoading(false)
     }
