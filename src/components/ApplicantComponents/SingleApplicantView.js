@@ -7,9 +7,9 @@ import { DeleteModel } from './DeleteModel'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-const owners = ["Bhavya", "Veera", "Rathnakaran", "Ranjith", "Balaji"]
+const owners = ["Bhavya", "Rathnakaran", "Veera", "Ranjith", "Balaji"]
 const SingleApplicantView = () => {
-    const [appData, setAppData] = useState({}) 
+    const [appData, setAppData] = useState({})
     const [loading, setLoading] = useState(false)
     const navigator = useNavigate()
     const changeDoneBy = localStorage.getItem("AdminInfo") ? JSON.parse(localStorage.getItem("AdminInfo")).name : "Bhavya"
@@ -171,7 +171,7 @@ const SingleApplicantView = () => {
                                         <CFormInput type="text" value={appData.status} readOnly placeholder="Status of the applicant" id="status" label="Status of the applicant" required />
                                     </CCol>
                                     <CCol md={6}>
-                                        <CFormInput type="text" value={new Date(appData.createdAt).toString().substring(0,25)} readOnly label="Applied Date"/>
+                                        <CFormInput type="text" value={new Date(appData.createdAt).toString().substring(0, 25)} readOnly label="Applied Date" />
                                     </CCol>
                                     <CCol md={6}>
                                         <CFormInput type="text" onClick={() => window.open(`${appData.resumeLink}`)} value={appData.resumeLink} style={{ color: "green", cursor: "pointer" }} readOnly label="Resume Link" />

@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom'
 const UpdateStatus = ({ applicantdetails }) => {
     const changeDoneBy = JSON.parse(localStorage.getItem("AdminInfo")).name
     const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-    const owners = ["Bhavya", "Veera", "Rathnakaran", "Ranjith", "Balaji"]
+    const owners = ["Bhavya", "Rathnakaran", "Veera", "Ranjith", "Balaji"]
     const navigate = useNavigate()
-    const [errors, setErrors] = useState({}) 
+    const [errors, setErrors] = useState({})
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch()
     const [postData, setPostData] = useState({
@@ -56,14 +56,14 @@ const UpdateStatus = ({ applicantdetails }) => {
     const validForm = () => {
         let isValid = true
         let errors = {}
-        if (postData.status === applicantdetails.status ||postData.status.trim()==="") {
+        if (postData.status === applicantdetails.status || postData.status.trim() === "") {
             errors["status"] = "Please update the status of the applicant."
             isValid = false
         }
         if (!postData.comment || postData.comment.trim() === "") {
             errors["comment"] = "Please write comments for the applicant."
             isValid = false
-        } 
+        }
         if (!postData.commentBy || postData.commentBy === "") {
             errors["commentBy"] = "Please choose commented one."
             isValid = false
@@ -79,12 +79,12 @@ const UpdateStatus = ({ applicantdetails }) => {
     const hideErrors = (e) => {
         setErrors({ ...errors, [e.target.name]: "" })
     }
-    
+
 
     return (
         <div>
             <div>
-                <form className='border border-2 p-2' onSubmit={handleUpdateApplicantStatus}>
+                <form className='border border-2 p-2 rounded' onSubmit={handleUpdateApplicantStatus}>
                     <div className="mb-3 row">
                         <label className="col-sm-3 col-form-label">Change Done By:</label>
                         <div className="col-sm-9">
