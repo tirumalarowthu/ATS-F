@@ -73,9 +73,6 @@ const SingleApplicantView = () => {
         if (!postData.comment || postData.comment.trim() === "") {
             errors["comment"] = "Please write comments for the applicant."
             isValid = false
-        } else if (!/^[a-zA-Z0-9 ]+$/.test(postData.comment.trim())) {
-            errors["comment"] = "Ple"
-            isValid = false
         }
         if (!postData.commentBy || postData.commentBy === "") {
             errors["commentBy"] = "Please choose commented one."
