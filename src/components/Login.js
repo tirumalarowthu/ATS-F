@@ -61,28 +61,28 @@ const Login = ({ setIsLogin }) => {
        e.target.value !=="" && validateForm()
     }
     return (
-        <div className='loginForm border border-2 p-5 mx-auto my-5'>
-            <h4 className='text-center'>Applicant Tracking System</h4>
-            <form onSubmit={(e) => e.preventDefault()}>
+        <div className='loginForm border border-2 rounded bg-light p-5 mx-auto my-5'>
+            <h4 className='text-center text-decoration-underline'>Applicant Tracking System</h4>
+            <form className='mt-4' onSubmit={(e) => e.preventDefault()}>
                 <div className="form-group">
-                    <label htmlFor="inputEmail">Enter your email</label>
-                    <input className="form-control" type="email" name="email" onBlur={showErrors}  onChange={handleInputChange} onFocus={hideErros} placeholder="Email" />
+                    <label style={{ fontWeight: "600" }} htmlFor="inputEmail">Enter your email :</label>
+                    <input className="form-control" type="email" name="email" onBlur={showErrors} onChange={handleInputChange} onFocus={hideErros} placeholder="ex: hrpfsemi5@gmail.com" />
                     {
                         errors.email && <p className='text-danger'>{errors.email}</p>
                     }
                 </div>
                 <div className="form-group">
-                    <label htmlFor="inputPassword">Password</label>
-                    <input className="form-control" type="password" onBlur={showErrors} name="password" onChange={handleInputChange} onFocus={hideErros} placeholder="Password" />
+                    <label style={{ fontWeight: "600" }} htmlFor="inputPassword">Password :</label>
+                    <input className="form-control" type="password" onBlur={showErrors} name="password" onChange={handleInputChange} onFocus={hideErros} placeholder="ex: admin123" />
                     {
                         errors.password && <p className='text-danger'>{errors.password}</p>
                     }
                 </div>
                 
                 {
-                    loading ? <button className="btn btn-info w-100" type="button" disabled>
+                    loading ? <button className="btn btn-info w-100" style={{ fontWeight: "600" }} type="button" disabled>
                         <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Login... </button>
-                        : <button onClick={handleLogin} type="submit" className="btn btn-primary w-100" disabled={loading}>Login</button>
+                        : <button onClick={handleLogin} type="submit" className="btn btn-primary w-100" style={{ fontWeight: "600" }} disabled={loading}>Login</button>
                 }
             </form>
         </div>
