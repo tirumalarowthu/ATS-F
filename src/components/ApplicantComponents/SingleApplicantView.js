@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { CRow, CCol, CCard, CCardHeader, CCardBody, CForm, CFormInput } from '@coreui/react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { DeleteModel } from './DeleteModel'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-const owners = ["Bhavya", "Rathnakaran", "Veera", "Ranjith", "Balaji"]
 const SingleApplicantView = () => {
     const [appData, setAppData] = useState({})
+    const owners=useSelector(state=>state.adminList.adminList)
     const [loading, setLoading] = useState(false)
     const navigator = useNavigate()
     const changeDoneBy = localStorage.getItem("AdminInfo") ? JSON.parse(localStorage.getItem("AdminInfo")).name : "Bhavya"
@@ -18,6 +18,7 @@ const SingleApplicantView = () => {
     useEffect(() => {
         axios.get(`https://ats-b.vercel.app/applicant/id/${id}`).then(res => setAppData(res.data)).catch(err => console.log(err.message))
         // dispatch(GetApplicantById(id)).then(res => setAppData(res.payload))
+
     }, [dispatch, id])
     const [update, setUpdate] = useState(false)
     const [errors, setErrors] = useState({})

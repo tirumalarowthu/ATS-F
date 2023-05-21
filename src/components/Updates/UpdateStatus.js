@@ -1,13 +1,13 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 import { useNavigate } from 'react-router-dom'
 const UpdateStatus = ({ applicantdetails }) => {
     const changeDoneBy = JSON.parse(localStorage.getItem("AdminInfo")).name
     const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
-    const owners = ["Bhavya", "Rathnakaran", "Veera", "Ranjith", "Balaji"]
+    const owners = useSelector(state => state.adminList.adminList)
     const navigate = useNavigate()
     const [errors, setErrors] = useState({})
     const [loading, setLoading] = useState(false);

@@ -119,7 +119,7 @@ const AddApplicant = () => {
         }
       }catch(err){
         console.log(err)
-        setErrors(err.response.data)
+        setErrors(err.response.data ||{})
         alert(err.response.data.email || "Unable to add applicant now!Try after some time.")
       }
     }

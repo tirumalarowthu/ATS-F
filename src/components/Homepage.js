@@ -8,6 +8,7 @@ const Homepage = () => {
   const dispatch = useDispatch()
   const status = useSelector(state => state.applicantList.status)
   const ApplicantData = useSelector(state => state.applicantList.ApplicantsList)
+  console.log(ApplicantData)
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchApplicants())
@@ -19,11 +20,16 @@ const Homepage = () => {
         <h4 className='text-center p-4'>Welcome to Applicant Tracking System</h4>
       </div>
       {
-        // ApplicantData.length
+        status === "loading" ? <div style={{height:"100vh"}} className='text-center'>Applicants data is loading...</div> : <>
+          {
+            status === "success" && ApplicantData && ApplicantData.length > 0 ? <div style={{ minHeight: "80vh", overflow: "auto" }} className='container'>
+              <App ApplicantData={ApplicantData} />
+            </div> : <div style={{ minHeight: "80vh" }} className='text-center'>Applicants list is empty.Please
+              add applicants.</div>
+          }
+        </>
       }
-      {ApplicantData && ApplicantData.length > 0 ? <div style={{ minHeight: "80vh", overflow: "auto" }} className='container'>
-        <App ApplicantData={ApplicantData} />
-      </div> : <div style={{minHeight:"80vh"}} className='text-center'>Applicants are loading.....</div>}
+
       <div>
         <Footer />
       </div>

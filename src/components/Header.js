@@ -3,8 +3,12 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import "./HeaderStyles.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAdminList } from '../Redux/adminListSlice';
 const Header = () => {
     const [isFixed, setIsFixed] = useState(false);
+    const status=useSelector(state=>state.adminList.status)
+    const dispatch=useDispatch()
     const navigate = useNavigate()
     const logout = async() => {
         localStorage.removeItem("AdminInfo")
@@ -26,6 +30,11 @@ const Header = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+    useEffect(()=>{
+        if(status==="idle"){
+            dispatch(fetchAdminList())
+        }
+    },[dispatch,status])
 
     return (
         <Navbar style={{fontWeight:"600",padding:"10px"}} bg="info" variant="dark" expand="lg" fixed={isFixed ? 'top' : ''}>
@@ -37,7 +46,7 @@ const Header = () => {
                     <Link className='navLink ' to="/update/one">Change Applicant Status</Link>
                 </Nav>
                 <Nav className="mr-3">
-                    Welcome to {localStorage.getItem("AdminInfo")&& JSON.parse(localStorage.getItem("AdminInfo")).name}  
+                    Hi {localStorage.getItem("AdminInfo")&& JSON.parse(localStorage.getItem("AdminInfo")).name}  
                 </Nav>
                 <Nav>
                     <Link className='navLink' onClick={logout} >Logout</Link>
