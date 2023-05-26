@@ -1,4 +1,5 @@
 import axios from "axios";
+import { baseUrl } from "../components/baseUl";
 
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 const initialState = {
@@ -8,7 +9,7 @@ const initialState = {
 }
 export const fetchAdminList = createAsyncThunk("adminListSlice", async()=>{
     try {
-       const data= await axios.get("https://ats-b.vercel.app/admins/list").then(res=>res.data)
+       const data= await axios.get(`${baseUrl}/admins/list`).then(res=>res.data)
        return data
     } catch (error) {
         console.log(error.message)

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { fetchApplicants } from '../../Redux/applicantSlice'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../baseUl'
 const UpdateStatus = ({ applicantdetails }) => {
     const changeDoneBy = JSON.parse(localStorage.getItem("AdminInfo")).name
     const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
@@ -27,11 +28,11 @@ const UpdateStatus = ({ applicantdetails }) => {
         if (validForm() === true) {
             const config = { headers: { "Content-Type": "Application/json" } }
             try {
-                await axios.put("https://ats-b.vercel.app/appicant/update/comments", postData, config)
+                await axios.put(`${baseUrl}/appicant/update/comments`, postData, config)
                 try {
                     toast.success(`${applicantdetails.name} status updated successfully`)
                     dispatch(fetchApplicants())
-                    await axios.post(`https://ats-b.vercel.app/change/${postData.commentBy}/${postData.nextRound}/${applicantdetails.name}`)
+                    await axios.post(`${baseUrl}/change/${postData.commentBy}/${postData.nextRound}/${applicantdetails.name}`)
                     alert(`Email send to ${postData.nextRound} successfully`)
                     navigate("/")
                 } catch (err) {

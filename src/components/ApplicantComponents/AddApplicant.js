@@ -3,6 +3,7 @@ import axios from "axios"
 import { useDispatch } from 'react-redux';
 import { fetchApplicants } from '../../Redux/applicantSlice';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../baseUl';
 const roles = ['MERN Stack Developer', 'React JS Developer', 'Node Js Developer', 'Python/Java Tester', 'Java Developer', 'Python Developer'];
 const qualifications = ['Master of Engineering', 'Master of Technology', 'Bachelor of Engineering', 'Bachelor of Technology', "Bachelor's degree", "Others"];
 const branches = ['Computer Science', 'Information Technology', 'Electronics and Communication', 'Others'];
@@ -105,12 +106,12 @@ const AddApplicant = () => {
     if (validate()) {
       console.log(formData)
       try {
-        await axios.post("https://ats-b.vercel.app/applicant/add", formData)
+        await axios.post(`${baseUrl}/applicant/add`, formData)
         try {
           dispatch(fetchApplicants())
           alert(`New Applicant ${formData.name} Added Successfully`)
           setLoading(false)
-          await axios.post(`https://ats-b.vercel.app/add/send/${formData.name}`)
+          await axios.post(`${baseUrl}/add/send/${formData.name}`)
           alert('Email send successfully')
           navigate("/")
         } catch (err) {
@@ -129,7 +130,7 @@ const AddApplicant = () => {
   return (
     <div className='container border border-2'>
       <h4 className='text-center'>Add Applicant</h4>
-      <form className="p-4 border border-2 " onSubmit={handleSubmit}>
+      <form className="p-4 border border-2 rounded bg-light" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name of the Applicant:</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} className="form-control" />
@@ -148,7 +149,7 @@ const AddApplicant = () => {
         <div className="form-group">
           <label>Applied Role:</label>
           <select name="role" value={formData.role} onChange={handleChange} className="form-select">
-            <option value="">Select applied role</option>
+            <option value="">---Select applied role---</option>
             {roles.map(r => <option key={r} value={r}>{r}</option>)}
           </select>
           {errors.role && <span className="text-danger">{errors.role}</span>}
@@ -161,7 +162,7 @@ const AddApplicant = () => {
         <div className="form-group">
           <label>Highest Qualification:</label>
           <select name="qualification" value={formData.qualification} onChange={handleChange} className="form-select">
-            <option value="">Select Highest Qualification</option>
+            <option value="">---Select Highest Qualification---</option>
             {qualifications.map(q => <option key={q} value={q}>{q}</option>)}
           </select>
           {errors.qualification && <span className="text-danger">{errors.qualification}</span>}
@@ -169,7 +170,7 @@ const AddApplicant = () => {
         <div className="form-group">
           <label>Branch:</label>
           <select name="branch" value={formData.branch} onChange={handleChange} className="form-select">
-            <option value="">Select branch</option>
+            <option value="">---Select branch---</option>
             {branches.map(b => <option key={b} value={b}>{b}</option>)}
           </select>
           {errors.branch && <span className="text-danger">{errors.branch}</span>}

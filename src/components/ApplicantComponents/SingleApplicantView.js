@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { DeleteModel } from './DeleteModel'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchApplicants } from '../../Redux/applicantSlice'
+import { baseUrl } from '../baseUl'
 const statusOpt = ["HR Round", "Hiring Manager", "Technical Round", "Rejected", "On hold", "Selected"]
 const SingleApplicantView = () => {
     const [appData, setAppData] = useState({})
@@ -16,7 +17,7 @@ const SingleApplicantView = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
     useEffect(() => {
-        axios.get(`https://ats-b.vercel.app/applicant/id/${id}`).then(res => setAppData(res.data)).catch(err => console.log(err.message))
+        axios.get(`${baseUrl}/applicant/id/${id}`).then(res => setAppData(res.data)).catch(err => console.log(err.message))
         // dispatch(GetApplicantById(id)).then(res => setAppData(res.payload))
 
     }, [dispatch, id])
@@ -39,11 +40,11 @@ const SingleApplicantView = () => {
             }
 
             try {
-                await axios.put("https://ats-b.vercel.app/appicant/update/comments", data, config)
+                await axios.put(`${baseUrl}/appicant/update/comments`, data, config)
                 try {
                     toast.success(`${appData.name} status updated successfully`)
                     setLoading(false)
-                    await axios.post(`https://ats-b.vercel.app/change/${data.commentBy}/${data.nextRound}/${appData.name}`)
+                    await axios.post(`${baseUrl}/change/${data.commentBy}/${data.nextRound}/${appData.name}`)
                     alert(`Email send to ${postData.nextRound} successfully`)
                     window.location.reload(false)
                 } catch (err) {
@@ -92,7 +93,7 @@ const SingleApplicantView = () => {
     }
     ///delete Applicant 
     const deleteApplicant = async () => {
-        await axios.delete(`https://ats-b.vercel.app/applicant/delete/${appData._id}`)
+        await axios.delete(`${baseUrl}/applicant/delete/${appData._id}`)
             .then(res => {
                 alert(`Applicant ${appData.name} deleted successfully`)
                 navigator("/")

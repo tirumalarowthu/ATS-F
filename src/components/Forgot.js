@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import { baseUrl } from './baseUl'
 const Forgot = () => {
     const [formData, setFormData] = useState({})
     const [msg,setMsg]=useState({})
@@ -14,7 +15,7 @@ const Forgot = () => {
                 setMsg({c_password:"Password should match with confirm password"})
             }else{
                 setMsg({})
-                await axios.patch(`https://ats-b.vercel.app/admin/forgot_password/${email}`,formData)
+                await axios.patch(`${baseUrl}/admin/forgot_password/${email}`,formData)
                 .then(res=>res.data)
                 .catch(err=>setMsg({email:"Invalid email.Please enter valid email"}))
             }

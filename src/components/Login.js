@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import "./LoginStyles.css"
+import { baseUrl } from './baseUl'
 const Login = ({ setIsLogin }) => {
     const [formData, setFormData] = useState({})
     const [errors, setErrors] = useState({})
@@ -18,7 +19,7 @@ const Login = ({ setIsLogin }) => {
         validateForm()
         const config = { headers: { "Content-Type": "Application/json" } }
         if (validateForm() === true) {
-            await axios.post(`https://ats-b.vercel.app/admin/login/${formData.email}`, formData, config)
+            await axios.post(`${baseUrl}/admin/login/${formData.email}`, formData, config)
                 .then((res) => {
                     localStorage.setItem("AdminInfo", JSON.stringify(res.data))
                     toast.success(`Welcome to ${res.data.name}`)

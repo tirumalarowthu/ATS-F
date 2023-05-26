@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { baseUrl } from "../components/baseUl";
 
 const initialState = {
     ApplicantsList: [],
@@ -9,7 +10,7 @@ const initialState = {
 export const fetchApplicants = createAsyncThunk("applicant slice", async () => {
     try {
 
-        const data = await axios.get("https://ats-b.vercel.app/allApplicants").then(res => res.data)
+        const data = await axios.get(`${baseUrl}/allApplicants`).then(res => res.data)
         // console.log(data)
         return data
 
