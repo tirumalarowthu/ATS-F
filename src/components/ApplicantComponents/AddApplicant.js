@@ -104,22 +104,22 @@ const AddApplicant = () => {
     setLoading(true)
     if (validate()) {
       console.log(formData)
-      try{
+      try {
         await axios.post("https://ats-b.vercel.app/applicant/add", formData)
-        try{
+        try {
           dispatch(fetchApplicants())
           alert(`New Applicant ${formData.name} Added Successfully`)
           setLoading(false)
           await axios.post(`https://ats-b.vercel.app/add/send/${formData.name}`)
           alert('Email send successfully')
           navigate("/")
-        }catch(err){
+        } catch (err) {
           alert("Failed to send email.")
           navigate("/")
         }
-      }catch(err){
+      } catch (err) {
         console.log(err)
-        setErrors(err.response.data ||{})
+        setErrors(err.response.data || {})
         alert(err.response.data.email || "Unable to add applicant now!Try after some time.")
       }
     }
@@ -129,7 +129,7 @@ const AddApplicant = () => {
   return (
     <div className='container border border-2'>
       <h4 className='text-center'>Add Applicant</h4>
-      <form className="p-4 border border-2" onSubmit={handleSubmit}>
+      <form className="p-4 border border-2 " onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name of the Applicant:</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} className="form-control" />
