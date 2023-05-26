@@ -85,7 +85,7 @@ const UpdateStatus = ({ applicantdetails }) => {
     return (
         <div>
             <div>
-                <form className='border border-2 p-2 rounded' onSubmit={handleUpdateApplicantStatus}>
+                <form className='border border-2 p-2 rounded bg-light' onSubmit={handleUpdateApplicantStatus}>
                     <div className="mb-3 row">
                         <label className="col-sm-3 col-form-label">Change Done By:</label>
                         <div className="col-sm-9">

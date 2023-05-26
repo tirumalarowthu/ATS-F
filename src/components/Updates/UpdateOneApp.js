@@ -28,7 +28,7 @@ const UpdateOneApp = () => {
     return (
         <>
             <div style={{ height: "100vh" }}>
-                <div className='container p-2 my-4 border border-2'>
+                <div className='container p-2 my-4 border border-2 rounded bg-light'>
                     <form onSubmit={handleSubmit} className='p-2'>
                         <label>Enter Email of the Applicant</label>
                         <input className='form-control' type="email" onChange={(e) => setEmail(e.target.value)} />

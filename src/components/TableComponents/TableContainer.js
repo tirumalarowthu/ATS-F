@@ -67,7 +67,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
 
   return (
     <Fragment>
-      <div className='border border-2 overflow-auto '>
+      <div className='border border-2 rounded overflow-auto '>
         {/* Table for the applicantList */}
         <Table id="applicantTable" bordered hover {...getTableProps()}>
           <thead>
